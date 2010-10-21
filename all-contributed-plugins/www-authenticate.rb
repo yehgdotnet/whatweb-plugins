@@ -14,12 +14,15 @@ def passive
 	m=[]
 	type=''
 	realm = ''
-	if @meta['www-authenticate']  != nil
-		header = @meta['www-authenticate'].scan(/([a-zA-Z0-9]+) realm="(.*?)"/)
-		if header.size == 1
+	unless @meta['www-authenticate'] == nil
+		if @meta['www-authenticate'].scan(/([a-zA-Z0-9]+) realm="(.*?)"/).size == 1
+		   header = @meta['www-authenticate'].scan(/([a-zA-Z0-9]+) realm="(.*?)"/)
 		   type = header[0][0]
 		   realm = header[0][1]
 		   m << {:name=>"www-authenticate",:string=>" #{type}, #{realm}" } 
+		elsif  @meta['www-authenticate'].scan(/([a-zA-Z0-9]+)/).size > 1
+			header = @meta['www-authenticate']
+			m << {:name=>"www-authenticate",:string=>" #{header}" } 
 		end
 	end
 	m
