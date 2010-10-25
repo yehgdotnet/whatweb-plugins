@@ -37,14 +37,15 @@ http://89.137.17.241
 http://62.4.73.165
 http://62.92.43.234
 http://89.137.17.241
+http://92.70.4.235
 |	
 
 def passive
 	m=[]
 	os = ''
 	server = @meta['server'] if @meta.keys.include?("server")
-	if server =~ /\(([a-zA-Z0-9\s\-\_]+)\)/
-	   os = server.scan(/\(([a-zA-Z0-9\s\-\_]+)\)/)
+	if server =~ /\(([a-zA-Z0-9\s\-\_\.\/]+)\)/
+	   os = server.scan(/\(([a-zA-Z0-9\s\.\/\-\_]+)\)/)
 	   if os.size != 0
 		m << {:string=>os[0]}
 	   end 
