@@ -5,9 +5,12 @@
 # http://www.morningstarsecurity.com/research/whatweb
 ##
 
+# 0.2
+# Added more signatures- bcole
+
 Plugin.define "OS" do
 author "Aung Khant, http://yehg.net"
-version "0.1"
+version "0.2"
 description "Identify OS in server header and others"
 
 examples=%w|
@@ -65,6 +68,34 @@ def passive
 		m << {:string=>servlet.to_a}
 		m << {:string=>java.to_a}	
 		m << {:string=>os.to_a}		
+	end
+	if m.size == 0
+	# bcoles
+	#It might be a good idea to add something like this as a catch-all for anything that you can't fingerprint easily:
+		m << { :version=>"Windows" } if @meta["server"] =~ /[^\r^\n]*Windows[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows[^\r^\n]*/i
+		m << { :version=>"Windows Vista" } if @meta["server"] =~ /[^\r^\n]*Windows Vista[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows Vista[^\r^\n]*/i
+		m << { :version=>"Windows 2003" } if @meta["server"] =~ /[^\r^\n]*Windows 2003[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows 2003[^\r^\n]*/i
+		m << { :version=>"Windows 2000" } if @meta["server"] =~ /[^\r^\n]*Windows 2000[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows 2000[^\r^\n]*/i
+		m << { :version=>"Windows Server 2008" } if @meta["server"] =~ /[^\r^\n]*Windows Server 2008[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows Server 2008[^\r^\n]*/i
+		m << { :version=>"Windows XP" } if @meta["server"] =~ /[^\r^\n]*Windows XP[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows XP[^\r^\n]*/i
+		m << { :version=>"Linux" } if @meta["server"] =~ /[^\r^\n]*linux[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*linux[^\r^\n]*/i
+		m << { :version=>"Unix" } if @meta["server"] =~ /[^\r^\n]*UNIX[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*UNIX[^\r^\n]*/i
+		m << { :version=>"FreeBSD" } if @meta["server"] =~ /[^\r^\n]*FreeBSD[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*FreeBSD[^\r^\n]*/i
+		m << { :version=>"Solaris" } if @meta["server"] =~ /[^\r^\n]*Solaris[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Solaris[^\r^\n]*/i
+		m << { :version=>"MacOSX" } if @meta["server"] =~ /[^\r^\n]*MacOSX[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*MacOSX[^\r^\n]*/i
+		m << { :version=>"CentOS" } if @meta["server"] =~ /[^\r^\n]*CentOS[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*CentOS[^\r^\n]*/i
+		m << { :version=>"Debian Linux" } if @meta["server"] =~ /[^\r^\n]*Debian[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Debian[^\r^\n]*/i
+		m << { :version=>"Ubuntu Linux" } if @meta["server"] =~ /[^\r^\n]*Ubuntu[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Ubuntu[^\r^\n]*/i
+		m << { :version=>"Mandrake Linux" } if @meta["server"] =~ /[^\r^\n]*Mandrake[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Mandrake[^\r^\n]*/i
+		m << { :version=>"PCLinuxOS" } if @meta["server"] =~ /[^\r^\n]*PCLinuxOS[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*PCLinuxOS[^\r^\n]*/i
+		m << { :version=>"Fedora Linux" } if @meta["server"] =~ /[^\r^\n]*Fedora[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Fedora[^\r^\n]*/i
+		m << { :version=>"openSUSE" } if @meta["server"] =~ /[^\r^\n]*openSUSE[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*openSUSE[^\r^\n]*/i
+		m << { :version=>"Arch Linux" } if @meta["server"] =~ /[^\r^\n]*Arch Linux[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Arch Linux[^\r^\n]*/i
+		m << { :version=>"Mandriva Linux" } if @meta["server"] =~ /[^\r^\n]*Mandriva Linux[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Mandriva Linux[^\r^\n]*/i
+		m << { :version=>"Linux\/SUSE" } if @meta["server"] =~ /[^\r^\n]*Linux\/SUSE[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Linux\/SUSE[^\r^\n]*/i
+		m << { :version=>"Slackware Linux" } if @meta["Poweredby"] =~ /[^\r^\n]*Slackware[^\r^\n]*/i or @meta["poweredby"] =~ /[^\r^\n]*Slackware[^\r^\n]*/i
+		m << { :version=>"Gentoo Linux" } if @meta["X-Powered-By"] =~ /[^\r^\n]*Gentoo[^\r^\n]*/i or @meta["x-powered-by"] =~ /[^\r^\n]*Gentoo[^\r^\n]*/i
+		m << { :version=>"Red Hat" } if @meta["server"] =~ /[^\r^\n]*Red Hat[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Red Hat[^\r^\n]*/i or @meta["server"] =~ /[^\r^\n]*Red-Hat[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Red-Hat[^\r^\n]*/i
 	end
 	m
 end
