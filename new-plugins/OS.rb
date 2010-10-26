@@ -71,7 +71,7 @@ def passive
 	end
 	if m.size == 0
 	# bcoles
-	#It might be a good idea to add something like this as a catch-all for anything that you can't fingerprint easily:
+	# It might be a good idea to add something like this as a catch-all for anything that you can't fingerprint easily:
 		m << { :version=>"Windows" } if @meta["server"] =~ /[^\r^\n]*Windows[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows[^\r^\n]*/i
 		m << { :version=>"Windows Vista" } if @meta["server"] =~ /[^\r^\n]*Windows Vista[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows Vista[^\r^\n]*/i
 		m << { :version=>"Windows 2003" } if @meta["server"] =~ /[^\r^\n]*Windows 2003[^\r^\n]*/i or @meta["Server"] =~ /[^\r^\n]*Windows 2003[^\r^\n]*/i
