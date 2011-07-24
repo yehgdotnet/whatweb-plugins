@@ -68,27 +68,11 @@ matches [
 ]
 
 def bin2dec(number)
-   # taken from http://icfun.blogspot.com/2008/04/ruby-number-conversion-from-one-base-to.html
-   ret_dec = 0;
-   number.split(//).each{|digit|
-      ret_dec = (Integer(digit) + ret_dec) * 2;
-   }
-   return ret_dec/2;
+   return number.to_i(2)
 end
 
 def dec2bin(number)
-   # taken from http://icfun.blogspot.com/2008/04/ruby-number-conversion-from-one-base-to.html
-   number = Integer(number);
-   if(number == 0)
-      return 0;
-   end
-   ret_bin = "";
-   ## Untill val is zero, convert it into binary format
-   while(number != 0)
-      ret_bin = String(number % 2) + ret_bin;
-      number = number / 2;
-   end
-   return ret_bin;
+   return number.to_s(2)
 end
 
 def extract_ip(s)
@@ -97,7 +81,6 @@ def extract_ip(s)
     b2 = b1
     d1 = []
     ip = ''
-
     unless  b1.length % 8 == 0        
         r = b1
         dif = 32 - b1.length        
