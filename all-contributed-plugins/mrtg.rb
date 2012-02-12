@@ -21,7 +21,7 @@ matches [
 def aggressive
 	m=[]
 
-	target = URI.join(@base_uri.to_s,'/mrtg/aggregated.html').to_s	
+	target = URI.join(@base_uri.to_s,'mrtg/aggregated.html').to_s	
 	status,url,ip,body,headers=open_target(target)	
 	if status == 200
 

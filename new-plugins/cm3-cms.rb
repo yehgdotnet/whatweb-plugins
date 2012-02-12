@@ -36,7 +36,7 @@ matches [
 def aggressive
 	m=[]
 	# cm2
-	target = URI.join(@base_uri.to_s,'/admin/').to_s	
+	target = URI.join(@base_uri.to_s,'admin/').to_s	
 	status,url,ip,body,headers=open_target(target)	
 	if status == 200
 
@@ -46,7 +46,7 @@ def aggressive
 
 	end
 	# cm3
-	target = URI.join(@base_uri.to_s,'/AcoraCMS/Admin/').to_s	
+	target = URI.join(@base_uri.to_s,'AcoraCMS/Admin/').to_s	
 	status,url,ip,body,headers=open_target(target)	
 	if status == 200
 
